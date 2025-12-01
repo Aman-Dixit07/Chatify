@@ -9,7 +9,7 @@ const __dirname = path.resolve();
 dotenv.config();
 
 const app = express();
-const Port = process.env.Port || 3000;
+const Port = process.env.Port || 5000;
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
