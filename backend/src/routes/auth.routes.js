@@ -14,7 +14,7 @@ const router = express.Router();
 router.use(arcjetProtection);
 
 router.post("/signup", signup);
-router.get("/login", login);
+router.post("/login", login);
 router.post("/logout", logout);
 
 router.post("/update-profile", protectRoute, updateProfile);
