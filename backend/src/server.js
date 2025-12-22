@@ -7,10 +7,10 @@ import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import messageRoutes from "./routes/message.routes.js";
 import { ENV } from "./lib/env.js";
+import { app, server } from "./lib/socket.js";
 
 const __dirname = path.resolve();
 
-const app = express();
 const Port = ENV.PORT || 5000;
 
 //middlewares
@@ -29,7 +29,7 @@ if (ENV.NODE_ENV === "production") {
   });
 }
 
-app.listen(Port, () => {
+server.listen(Port, () => {
   console.log(`Server running on port- ${Port}`);
   connectDB();
 });
