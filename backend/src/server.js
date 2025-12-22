@@ -14,7 +14,7 @@ const app = express();
 const Port = ENV.PORT || 5000;
 
 //middlewares
-app.use(express.json()); //to read the req.body otherwise it will return undefined
+app.use(express.json({ limit: "5mb" })); //to read the req.body otherwise it will return undefined
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
