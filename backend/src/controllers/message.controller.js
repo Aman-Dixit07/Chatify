@@ -2,6 +2,7 @@ import cloudinary from "../lib/cloudinary.js";
 
 import User from "../models/User.js";
 import Message from "../models/Message.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 
 //Get all Users present in the Database
 export const getAllContacts = async (req, res) => {
@@ -79,7 +80,10 @@ export const sendMessage = async (req, res) => {
 
     await newMessage.save();
 
-    //ToDo - Socket.io implementation
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
 
     res.status(201).json(newMessage);
   } catch (error) {
